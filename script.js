@@ -260,3 +260,13 @@ const data = {
 		},
 	],
 }
+const mainNews = data.items.slice(0, 3)
+const smallNews = data.items.slice(3)
+
+console.log(mainNews)
+console.log(smallNews)
+
+const mainNewTemplate = document.getElementById('main-news-item')
+const smallNewTemplate = document.getElementById('small-article-item')
+const mainNewContainer = document.querySelector('.articles__big-column')
+const smallNewContainer = document.querySelector('.articles__small-column')
