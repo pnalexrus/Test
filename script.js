@@ -22,18 +22,6 @@ const data = {
 	],
 	items: [
 		{
-			id: 87901,
-			lang: 'ru',
-			date: 'Mon Oct 11 2021 16:58:58 GMT+0300 (Moscow Standard Time)',
-			title: 'Путин назвал причину своего кашля',
-			description:
-				'Президент России Владимир Путин рассказал о причине своего кашля и заявил, что со здоровьем у него все нормально. Об этом он рассказал на совещании с постоянными членами Совбеза РФ.\n\n"Валентина Ивановна (Матвиенко) не беспокойтесь, ...',
-			image:
-				'https://img.gazeta.ru/files3/211/14034211/RIAN_6661933.HR-pic905-895x505-19909.jpg',
-			source_id: 15,
-			category_id: 4,
-		},
-		{
 			id: 87874,
 			lang: 'ru',
 			date: 'Mon Oct 11 2021 16:54:23 GMT+0300 (Moscow Standard Time)',
@@ -261,12 +249,44 @@ const data = {
 	],
 }
 const mainNews = data.items.slice(0, 3)
-const smallNews = data.items.slice(3)
+const smallNews = data.items.slice(3, 12)
 
-console.log(mainNews)
-console.log(smallNews)
+const mainNewsTemplate = document.getElementById('main-news-item')
+const smallNewsTemplate = document.getElementById('small-article-item')
+const mainNewsContainer = document.querySelector('.articles__big-column')
+const smallNewsContainer = document.querySelector('.articles__small-column')
 
-const mainNewTemplate = document.getElementById('main-news-item')
-const smallNewTemplate = document.getElementById('small-article-item')
-const mainNewContainer = document.querySelector('.articles__big-column')
-const smallNewContainer = document.querySelector('.articles__small-column')
+mainNews.forEach((item) => {
+	const element = mainNewsTemplate.content.cloneNode(true)
+	const category = data.categories.find(
+		(categoryItem) => categoryItem.id === item.category_id
+	).name
+	const source = data.sources.find(
+		(sourceItem) => sourceItem.id === item.source_id
+	).name
+
+	element.querySelector('.main-article__title').textContent = item.title
+	element.querySelector('.main-article__image').src = item.image
+	element.querySelector('.main-article__category').textContent = category
+	element.querySelector('.main-article__text').textContent = item.description
+	element.querySelector('.main-article__source').textContent = source.name
+
+	mainNewsContainer.appendChild(element)
+})
+
+smallNews.forEach((item) => {
+	const element = smallNewsTemplate.content.cloneNode(true)
+	const source = data.sources.find(
+		(sourceItem) => sourceItem.id === item.source_id
+	).name
+	const date = new Date(item.date).toLocaleDateString('ru-RU', {
+		month: 'long',
+		day: 'numeric',
+	})
+
+	element.querySelector('.small-article__title').textContent = item.title
+	element.querySelector('.small-article__source').textContent = source.name
+	element.querySelector('.small-article__date').textContent = date
+
+	smallNewsContainer.appendChild(element)
+})
