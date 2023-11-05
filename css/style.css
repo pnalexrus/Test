@@ -221,12 +221,6 @@ body {
 	overflow: hidden;
 }
 
-.article-source {
-}
-
-.main-article__source {
-}
-
 .small-article {
 	margin-bottom: 35px;
 	padding-left: 11px;
@@ -251,21 +245,6 @@ body {
 
 .article-date + .article-source::before {
 	content: ' · ';
-}
-
-.small-article__caption {
-}
-
-.small-date {
-}
-
-.small-article__date {
-}
-
-.small-source {
-}
-
-.small-article__source {
 }
 
 .articles {
@@ -332,4 +311,3 @@ body {
 .footer__navigation .navigation__link:hover {
 	color: var(--color-accent);
 }
-.small-article-
